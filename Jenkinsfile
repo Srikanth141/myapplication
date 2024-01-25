@@ -23,7 +23,7 @@ pipeline {
         }
         stage('git clone') {
             steps {
-                git branch: 'main', credentialsId: 'Git-hub', url: 'https://github.com/Srikanth141/complete-prodcution-e2e-pipeline.git'
+                git branch: 'main', credentialsId: 'Git-hub', url: 'https://github.com/Srikanth141/myapplication.git'
             }
         }
         stage('Maven Build') {
@@ -84,7 +84,7 @@ pipeline {
         stage("Trigger CD Pipeline") {
             steps {
                 script {
-                    sh "curl -v -k --user clouduser:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'ec2-13-127-212-16.ap-south-1.compute.amazonaws.com:8080/job/Srikanth-CD/buildWithParameters?token=gitops-token'"
+                    sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'ec2-13-127-212-16.ap-south-1.compute.amazonaws.com:8080/job/Srikanth-CD/buildWithParameters?token=gitops-token'"
                 }
             }
         }
